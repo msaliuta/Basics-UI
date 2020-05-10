@@ -79,8 +79,14 @@ extension FeedViewController: UITableViewDataSource {
 }
 
 extension FeedViewController: FeedCellDelegate {
-    func setDoubleImageTapp(id: Post.Identifier) {
+    func setLikeButtonTapp(id: Post.Identifier) {
         let _ = DataProviders.shared.postsDataProvider.post(with: id)!.currentUserLikesThisPost ? DataProviders.shared.postsDataProvider.unlikePost(with: id) : DataProviders.shared.postsDataProvider.likePost(with: id)
+        post = DataProviders.shared.postsDataProvider.feed()
+        tabelView.reloadData()
+    }
+    
+    func setDoubleImageTapp(id: Post.Identifier) {
+        let _ = DataProviders.shared.postsDataProvider.likePost(with: id)
         post = DataProviders.shared.postsDataProvider.feed()
         tabelView.reloadData()
     }

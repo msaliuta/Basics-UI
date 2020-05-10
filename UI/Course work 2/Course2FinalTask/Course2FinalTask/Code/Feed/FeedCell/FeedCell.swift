@@ -14,6 +14,7 @@ protocol FeedCellDelegate: class {
     func setAvatarImageTapp(id: User.Identifier)
     func setLikesTapp(id: Post.Identifier)
     func setDoubleImageTapp(id: Post.Identifier)
+    func setLikeButtonTapp(id: Post.Identifier)
 }
 
 class FeedCell: UITableViewCell {
@@ -34,6 +35,7 @@ class FeedCell: UITableViewCell {
     @IBOutlet var mainImage: UIImageView! {
         didSet {
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(setDoubleTapp))
+            gestureRecognizer.numberOfTapsRequired = 2
             mainImage.addGestureRecognizer(gestureRecognizer)
         }
     }
@@ -64,7 +66,11 @@ class FeedCell: UITableViewCell {
     }
 
     @IBAction func likeButton(_ sender: Any) {
+        guard let id = postId else {
+            return
+        }
         
+        delegate?.setLikeButtonTapp(id: id)
     }
 
     override func awakeFromNib() {
