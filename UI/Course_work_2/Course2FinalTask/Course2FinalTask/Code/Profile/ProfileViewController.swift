@@ -71,12 +71,10 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: ProfileCollectionHeaderDelegate {
     func showFollowing() {
-        print("1")
         performSegue(withIdentifier: "ShowFollowing", sender: self)
     }
     
     func showFollowers() {
-        print("2")
         performSegue(withIdentifier: "ShowFollowers", sender: self)
     }    
     
